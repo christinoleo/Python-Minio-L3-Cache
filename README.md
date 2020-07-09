@@ -1,6 +1,11 @@
 # Python-Minio-L3-Cache
 Simple object-store caching helper library for python3. It uses Pickle for L2 cache and Minio as L3 cache.
 
+Installation:
+```bash
+pip install Python-Minio-L3-Cache
+```
+
 Simple Usage:
 ``` python
 from L3MinioCache import L2L3Cache

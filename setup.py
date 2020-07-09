@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import setuptools
 from distutils.core import setup
 
 setup(name='Python-Minio-L3-Cache',
@@ -11,4 +11,5 @@ setup(name='Python-Minio-L3-Cache',
       packages=['L3MinioCache'],
       license='MIT',
       long_description=open('README.md').read(),
+      long_description_content_type="text/markdown",
       )
