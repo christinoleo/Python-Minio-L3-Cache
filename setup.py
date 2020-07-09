@@ -10,5 +10,5 @@ setup(name='Python-Minio-L3-Cache',
       url='https://github.com/christinoleo/Python-Minio-L3-Cache/',
       packages=['L3MinioCache'],
       license='MIT',
-      long_description=open('README.txt').read(),
+      long_description=open('README.md').read(),
       )
