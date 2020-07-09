@@ -1,5 +1,5 @@
-from MinioL3Cache import MinioL3Cache
-from PickleL2Cache import PickleL2Cache
+from L3MinioCache.MinioL3Cache import MinioL3Cache
+from L3MinioCache.PickleL2Cache import PickleL2Cache
 import copy, inspect, hashlib
 
 
