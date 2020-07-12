@@ -64,11 +64,11 @@ class L2L3Cache:
         if result is not None:
             logging.debug(f'{name} l2 hit')
             return result
-        result = self.l3.load(name)
+
+        result = self.l3.download(name, self.l2.get_path(name))
         if result is not None:
             logging.debug(f'{name} l3 hit')
-            self.l2.dump(name, result)
-            return result
+            return self.l2.load(name)
         logging.debug(f'{name} cache miss')
         return None  # Cache Miss
 
