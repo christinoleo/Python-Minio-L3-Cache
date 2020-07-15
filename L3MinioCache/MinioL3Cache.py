@@ -8,12 +8,13 @@ from L3MinioCache.CacheInterface import L3Cache
 class MinioL3Cache(L3Cache):
     def __init__(self, minio_client: Minio,
                  bucket_name: str,
-                 location: str = "us-east-1"):
+                 location: str = "us-east-1",
+                 anonymous: bool = False):
         self.minio_client = minio_client
         self.bucket_name = bucket_name
         self.location = location
 
-        if not self.minio_client.bucket_exists(self.bucket_name):
+        if not anonymous and not self.minio_client.bucket_exists(self.bucket_name):
             try:
                 self.minio_client.make_bucket(self.bucket_name, location=location)
             except BucketAlreadyOwnedByYou as err:

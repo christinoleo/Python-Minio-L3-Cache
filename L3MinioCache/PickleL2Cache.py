@@ -23,9 +23,12 @@ class PickleL2Cache(L2Cache):
         full_path = self.get_path(name)
         if not os.path.isfile(full_path):
             return None
-        return pickle.load(open(full_path, 'rb'))
+        with open(full_path, 'rb') as f:
+            ret = pickle.load(f)
+        return ret
 
     def dump(self, name: str, data):
         full_path = self.get_path(name)
-        pickle.dump(data, open(full_path, 'wb'))
+        with open(full_path, 'wb') as f:
+            pickle.dump(data, f)
         return full_path
