@@ -1,4 +1,7 @@
 # Python-Minio-L3-Cache
+![Python application](https://github.com/christinoleo/Python-Minio-L3-Cache/workflows/Python%20application/badge.svg) 
+![Upload Python Package](https://github.com/christinoleo/Python-Minio-L3-Cache/workflows/Upload%20Python%20Package/badge.svg)
+
 Simple object-store caching helper library for python3. It uses Pickle for L2 cache and Minio as L3 cache.
 
 Installation:
