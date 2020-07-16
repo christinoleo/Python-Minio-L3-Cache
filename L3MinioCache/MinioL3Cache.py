@@ -1,8 +1,10 @@
+import io
+
 from minio import Minio
 from minio.error import (ResponseError, BucketAlreadyOwnedByYou,
                          BucketAlreadyExists, NoSuchKey)
 
-from L3MinioCache.CacheInterface import L3Cache
+from L3MinioCache.CacheInterface import L3Cache, L2Cache
 
 
 class MinioL3Cache(L3Cache):
@@ -35,11 +37,11 @@ class MinioL3Cache(L3Cache):
         except Exception:
             raise
 
-    def load(self, name: str):
+    def load(self, name: str, l2):
         try:
-            return self.minio_client.get_object(
+            return l2.load_b(io.BytesIO(self.minio_client.get_object(
                 bucket_name=self.bucket_name,
-                object_name=name).data
+                object_name=name).data))
         except NoSuchKey:
             return None
         except Exception:

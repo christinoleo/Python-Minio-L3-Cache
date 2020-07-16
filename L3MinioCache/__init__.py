@@ -65,10 +65,10 @@ class L2L3Cache:
             logging.debug(f'{name} l2 hit')
             return result
 
-        result = self.l3.load(name)
+        result = self.l3.load(name, self.l2)
         if result is not None:
             logging.debug(f'{name} l3 hit')
-            return self.l2.load(name)
+            return result
         logging.debug(f'{name} cache miss')
         return None  # Cache Miss
 
