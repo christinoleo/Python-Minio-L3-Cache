@@ -1,6 +1,7 @@
 import pickle
 from pathlib import Path
 import os
+from typing import IO
 
 from L3MinioCache.CacheInterface import L2Cache
 
@@ -27,6 +28,9 @@ class FileL2Cache(L2Cache):
         ret = f.read()
         f.close()
         return ret
+
+    def load_b(self, data: IO[bytes]):
+        return data.read().decode('utf8')
 
     def dump(self, name: str, data: str):
         f = open(self.get_path(name), "w" + self.binary)

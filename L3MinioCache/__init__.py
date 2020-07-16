@@ -65,6 +65,20 @@ class L2L3Cache:
             logging.debug(f'{name} l2 hit')
             return result
 
+        result = self.l3.load(name)
+        if result is not None:
+            logging.debug(f'{name} l3 hit')
+            return self.l2.load(name)
+        logging.debug(f'{name} cache miss')
+        return None  # Cache Miss
+
+    def download(self, name: str):
+        """Load from l2 or download from l3 in case of l2 cache miss"""
+        result = self.l2.load(name)
+        if result is not None:
+            logging.debug(f'{name} l2 hit')
+            return result
+
         result = self.l3.download(name, self.l2.get_path(name))
         if result is not None:
             logging.debug(f'{name} l3 hit')

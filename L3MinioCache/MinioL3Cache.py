@@ -39,7 +39,7 @@ class MinioL3Cache(L3Cache):
         try:
             return self.minio_client.get_object(
                 bucket_name=self.bucket_name,
-                object_name=name).read()
+                object_name=name).data
         except NoSuchKey:
             return None
         except Exception:
