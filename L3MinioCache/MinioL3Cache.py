@@ -3,8 +3,9 @@ import io
 from minio import Minio
 from minio.error import (ResponseError, BucketAlreadyOwnedByYou,
                          BucketAlreadyExists, NoSuchKey)
+import logging
 
-from L3MinioCache.CacheInterface import L3Cache, L2Cache
+from L3MinioCache.CacheInterface import L3Cache
 
 
 class MinioL3Cache(L3Cache):
@@ -39,9 +40,11 @@ class MinioL3Cache(L3Cache):
 
     def load(self, name: str, l2):
         try:
-            return l2.load_b(io.BytesIO(self.minio_client.get_object(
+            logging.info('downloading file to memory')
+            download = self.minio_client.get_object(
                 bucket_name=self.bucket_name,
-                object_name=name).data))
+                object_name=name)
+            return l2.load_b(io.BytesIO(download.data))
         except NoSuchKey:
             return None
         except Exception:
@@ -49,6 +52,7 @@ class MinioL3Cache(L3Cache):
 
     def download(self, name: str, path: str):
         try:
+            logging.info('downloading file')
             return self.minio_client.fget_object(
                 bucket_name=self.bucket_name,
                 object_name=name,
